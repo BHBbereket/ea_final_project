@@ -14,7 +14,7 @@ public class Job {
     @ManyToOne
     @JoinColumn(name = "company_id",referencedColumnName = "id")
     private Company company;
-    @OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.EAGER,orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
     @JoinColumn(name = "application_id", referencedColumnName = "id")
     private Application application;
     @OneToMany(mappedBy = "job",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
@@ -66,10 +66,6 @@ public class Job {
 
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
-    }
-
-    public int getId() {
-        return id;
     }
 
     @Override
