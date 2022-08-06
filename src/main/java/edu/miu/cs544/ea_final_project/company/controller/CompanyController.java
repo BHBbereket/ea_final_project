@@ -56,7 +56,7 @@ public class CompanyController {
         return offer_repo.save(offer);
     }
     @PostMapping("/add/{company_id}/job")
-    public Job addJob(Job job,@PathVariable int company_id){
+    public Job addJob(@RequestBody Job job,@PathVariable int company_id){
         Client client= client_repo.findClientById(company_id);
         job.setCompany(client);
         return jobRepo.save(job);
