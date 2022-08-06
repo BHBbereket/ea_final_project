@@ -3,20 +3,27 @@ package edu.miu.cs544.ea_final_project.company.entities;
 import edu.miu.cs544.ea_final_project.User.Person;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
+
 @Entity
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String declaration;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "applicant_id",referencedColumnName = "id")
     private Person applicant;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_Id",referencedColumnName = "id")
     private Client client;
-    private LocalDateTime issued_date;
+    private LocalDate issued_date;
+
+    public Offer() {
+
+    }
 
     public String getDeclaration() {
         return declaration;
@@ -26,31 +33,29 @@ public class Offer {
         this.declaration = declaration;
     }
 
-    public Person getApplicant() {
-        return applicant;
-    }
 
     public void setApplicant(Person applicant) {
         this.applicant = applicant;
     }
 
-    public Client getClient() {
-        return client;
+
+    public int getId() {
+        return id;
     }
 
     public void setClient(Client client) {
         this.client = client;
     }
 
-    public LocalDateTime getIssued_date() {
+    public LocalDate getIssued_date() {
         return issued_date;
     }
 
-    public void setIssued_date(LocalDateTime issued_date) {
+    public void setIssued_date(LocalDate issued_date) {
         this.issued_date = issued_date;
     }
 
-    public Offer(String declaration, LocalDateTime issued_date) {
+    public Offer(String declaration, LocalDate issued_date) {
         this.declaration = declaration;
         this.issued_date = issued_date;
     }

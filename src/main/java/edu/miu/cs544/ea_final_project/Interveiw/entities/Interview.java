@@ -5,7 +5,7 @@ import edu.miu.cs544.ea_final_project.company.entities.Recuriter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Interview {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -46,5 +46,18 @@ public abstract class Interview {
 
     public void setRecuriter(Recuriter recuriter) {
         this.recuriter = recuriter;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Interview() {
+    }
+
+    public Interview(String phone, String email, LocalDateTime interviewDate) {
+        this.phone = phone;
+        this.email = email;
+        this.interviewDate = interviewDate;
     }
 }

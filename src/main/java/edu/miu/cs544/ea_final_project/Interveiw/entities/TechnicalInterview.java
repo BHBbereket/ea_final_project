@@ -6,18 +6,18 @@ import java.util.List;
 
 @Entity
 
-public class TechincalInterview extends Interview {
+public class TechnicalInterview extends Interview {
     private Location location;
     private int duration;
     @OneToMany(mappedBy = "technical_int")
     private List<Questions> questions;
 
-    public TechincalInterview(Location location, int duration) {
+    public TechnicalInterview(Location location, int duration) {
         this.location = location;
         this.duration = duration;
     }
 
-    public TechincalInterview() {
+    public TechnicalInterview() {
     }
 
     public Location getLocation() {

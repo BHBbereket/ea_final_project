@@ -2,9 +2,10 @@ package edu.miu.cs544.ea_final_project.company.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import java.io.Serializable;
 
 @Entity
-public class Client extends Company {
+public class Client extends Company  {
     private String mission;
     private String reason;
     private String website;
@@ -48,12 +49,11 @@ public class Client extends Company {
         this.offer = offer;
     }
 
-    public Client(String name, String mission, String reason, String website, Offer offer) {
+    public Client(String name, String mission, String reason, String website) {
         super(name);
         this.mission = mission;
         this.reason = reason;
         this.website = website;
-        this.offer = offer;
     }
 
     public Client(String mission, String reason, String website, Offer offer) {

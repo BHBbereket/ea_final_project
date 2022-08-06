@@ -28,6 +28,10 @@ public class Recuriter extends Company {
     public Recuriter() {
     }
 
+    public Recuriter(String name) {
+        super(name);
+    }
+
     @Override
     public String toString() {
         return "Recuriter{" +

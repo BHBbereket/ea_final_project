@@ -33,6 +33,10 @@ public class Company {
     public Company() {
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Company{" +

@@ -40,9 +40,9 @@ public class Application {
         this.resume_version = resume_version;
     }
 
-    public Person getApplicant() {
-        return applicant;
-    }
+//    public Person getApplicant() {
+//        return applicant;
+//    }
 
     public void setApplicant(Person applicant) {
         this.applicant = applicant;
@@ -54,6 +54,10 @@ public class Application {
 
     public void setJob(Job job) {
         this.job = job;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

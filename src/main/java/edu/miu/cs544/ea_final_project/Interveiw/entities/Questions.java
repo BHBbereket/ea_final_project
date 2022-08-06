@@ -9,7 +9,7 @@ public class Questions {
     private String question;
     @ManyToOne
     @JoinColumn(name = "interview_id",referencedColumnName = "id")
-    private TechincalInterview technical_int;
+    private TechnicalInterview technical_int;
 
     public Questions(String question) {
         this.question = question;
@@ -26,12 +26,16 @@ public class Questions {
         this.question = question;
     }
 
-    public TechincalInterview getTechnical_int() {
+    public TechnicalInterview getTechnical_int() {
         return technical_int;
     }
 
-    public void setTechnical_int(TechincalInterview technical_int) {
+    public void setTechnical_int(TechnicalInterview technical_int) {
         this.technical_int = technical_int;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

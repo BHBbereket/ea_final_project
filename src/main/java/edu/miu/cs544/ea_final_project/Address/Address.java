@@ -13,9 +13,9 @@ public class Address {
     private String city;
     private String state;
     private int zip;
-    @OneToOne(mappedBy = "address")
+    @OneToOne(mappedBy = "address",fetch = FetchType.LAZY)
     private Person applicant;
-    @OneToOne(mappedBy = "address")
+    @OneToOne(mappedBy = "address",fetch = FetchType.LAZY)
     private Company company;
 
     public Address(String city, String state, int zip) {
@@ -51,9 +51,7 @@ public class Address {
         this.zip = zip;
     }
 
-    public Person getApplicant() {
-        return applicant;
-    }
+
 
     public void setApplicant(Person applicant) {
         this.applicant = applicant;
@@ -65,6 +63,10 @@ public class Address {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

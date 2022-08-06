@@ -65,6 +65,10 @@ public class Skill {
         this.job = job;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Skill{" +
