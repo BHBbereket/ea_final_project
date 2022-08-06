@@ -22,6 +22,14 @@ public class Skill {
         this.expreince = expreince;
     }
 
+    public Skill(String description, String language, String name, int expreince, Job job) {
+        this.description = description;
+        this.language = language;
+        this.name = name;
+        this.expreince = expreince;
+        this.job = job;
+    }
+
     public Skill() {
     }
 

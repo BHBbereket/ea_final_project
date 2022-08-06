@@ -26,6 +26,7 @@ public class JobController {
     public Job addSkills(@RequestBody List<Skill> skills,@PathVariable int job_id){
         Job job= jobRepo.findJobById(job_id);
         job.setSkills(skills);
+        skillRepo.saveAll(skills);
         return job;
     }
 
