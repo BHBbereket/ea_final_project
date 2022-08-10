@@ -3,10 +3,11 @@ package edu.miu.cs544.ea_final_project.entities;
 import edu.miu.cs544.ea_final_project.entities.companyEntities.Company;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Job {
+public class Job implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
@@ -14,11 +15,11 @@ public class Job {
     @ManyToOne
     @JoinColumn(name = "company_id",referencedColumnName = "id")
     private Company company;
-    @OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
-    @JoinColumn(name = "application_id", referencedColumnName = "id")
-    private Application application;
-    @OneToMany(mappedBy = "job",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "job", cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+    private List<Application> applications;
+    @OneToMany(mappedBy = "job")
     private List<Skill> skills;
+
 
     public Job(String title, double salary) {
         this.title = title;
@@ -52,12 +53,12 @@ public class Job {
         this.company = company;
     }
 
-    public Application getApplication() {
-        return application;
+    public List<Application> getApplications() {
+        return applications;
     }
 
-    public void setApplication(Application application) {
-        this.application = application;
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
     }
 
     public List<Skill> getSkills() {

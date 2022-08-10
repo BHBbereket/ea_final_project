@@ -34,10 +34,7 @@ public class CompanyController {
 
         return companyService.addOffer(offer,client,user_id);
     }
-    @PostMapping("/add/{company_id}/job")
-    public Job addJob(@RequestBody Job job,@PathVariable int company_id){
-        return companyService.addJob(job,company_id);
-    }
+
 
 
 

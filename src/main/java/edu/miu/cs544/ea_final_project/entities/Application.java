@@ -3,17 +3,19 @@ package edu.miu.cs544.ea_final_project.entities;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.Interview;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Entity
 public class Application {
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDateTime date;
+    private LocalDate date;
     private String resume_version;
     @ManyToOne
     @JoinColumn(name = "applicant_id",referencedColumnName = "id")
     private Person applicant;
-    @OneToOne(mappedBy = "application")
+    @ManyToOne
+    @JoinColumn(name = "job_id", referencedColumnName = "id")
     private Job job;
 
     @OneToOne(mappedBy = "application")
@@ -31,7 +33,7 @@ public class Application {
         this.interview = interview;
     }
 
-    public Application(LocalDateTime date, String resume_version) {
+    public Application(LocalDate date, String resume_version) {
         this.date = date;
         this.resume_version = resume_version;
     }
@@ -39,11 +41,11 @@ public class Application {
     public Application() {
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

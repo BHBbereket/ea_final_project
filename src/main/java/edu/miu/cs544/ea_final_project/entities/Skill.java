@@ -13,8 +13,8 @@ public class Skill {
     private String language;
     private String name;
     private int expreince;
-    @ManyToOne
-    @JoinColumn(name = "job_id",referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_id")
     private Job job;
 
     public Skill(String description, String language, String name, int expreince) {

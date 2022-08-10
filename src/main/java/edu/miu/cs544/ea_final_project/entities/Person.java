@@ -5,24 +5,25 @@ import edu.miu.cs544.ea_final_project.entities.companyEntities.Offer;
 import edu.miu.cs544.ea_final_project.entities.Application;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "applicant_table")
-public class Person {
+public class Person implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String email;
     private String username;
     private String password;
-    @OneToMany(cascade = CascadeType.PERSIST,mappedBy = "applicant",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "applicant",fetch = FetchType.EAGER)
     private List<Application> application;
     @OneToOne(mappedBy = "applicant")
     private Offer offer;
 
     @OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id",referencedColumnName = "id")
+    @JoinColumn(name = "address_id",referencedColumnName = "id" ,nullable = true)
     private Address address;
 
     public Address getAddress() {
@@ -98,6 +99,10 @@ public class Person {
         this.username = username;
         this.password = password;
         this.address = address;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 
     @Override

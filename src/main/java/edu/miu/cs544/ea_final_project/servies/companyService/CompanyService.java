@@ -52,11 +52,7 @@ public class CompanyService {
         return offer_repo.save(offer);
     }
 
-    public Job addJob(Job job,int client_id){
-        Client client= client_repo.findClientById(client_id);
-        job.setCompany(client);
-        return jobRepo.save(job);
-    }
+
 
 
 }

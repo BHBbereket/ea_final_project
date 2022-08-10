@@ -3,10 +3,10 @@ package edu.miu.cs544.ea_final_project.entities;
 import edu.miu.cs544.ea_final_project.entities.companyEntities.Company;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-
-public class Address {
+public class Address implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String city;

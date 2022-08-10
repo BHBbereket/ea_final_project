@@ -1,4 +1,4 @@
-package edu.miu.cs544.ea_final_project.servies.interviewService;
+package edu.miu.cs544.ea_final_project.interviewService;
 
 import edu.miu.cs544.ea_final_project.Repository.Application_Repo;
 import edu.miu.cs544.ea_final_project.Repository.comoanyRepository.Recuriter_Repo;
@@ -8,10 +8,17 @@ import edu.miu.cs544.ea_final_project.Repository.interviewrepository.Technical_R
 import edu.miu.cs544.ea_final_project.entities.Application;
 import edu.miu.cs544.ea_final_project.entities.companyEntities.Recuriter;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.HiringInterview;
+import edu.miu.cs544.ea_final_project.entities.interviewEntities.Interview;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.ScreeningInterview;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.TechnicalInterview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InterviewService {
@@ -82,6 +89,16 @@ public class InterviewService {
 
         return hiring_repo.save(hiringInterview);
     }
+    public List<Interview> getAllInterview(int application_id){
+        Application application=application_repo.findById(application_id).get();
+        HiringInterview hiringInterview=hiring_repo.findHiringInterviewByApplication(application);
+        ScreeningInterview screeningInterview=screening_repo.findScreeningInterviewByApplication(application);
+        TechnicalInterview technicalInterview=technical_repol.findTechnicalInterviewByApplication(application);
+        List<Interview> interviews=new ArrayList<>(Arrays.asList(hiringInterview,screeningInterview,technicalInterview));
+        interviews=interviews.stream().filter(interview -> interview!=null).collect(Collectors.toList());
+        return interviews;
+    }
+
 
 
 
