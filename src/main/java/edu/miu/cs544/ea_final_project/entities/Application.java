@@ -1,5 +1,7 @@
 package edu.miu.cs544.ea_final_project.entities;
 
+import edu.miu.cs544.ea_final_project.entities.interviewEntities.Interview;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 @Entity
@@ -13,6 +15,21 @@ public class Application {
     private Person applicant;
     @OneToOne(mappedBy = "application")
     private Job job;
+
+    @OneToOne(mappedBy = "application")
+    private Interview interview;
+
+    public Person getApplicant() {
+        return applicant;
+    }
+
+    public Interview getInterview() {
+        return interview;
+    }
+
+    public void setInterview(Interview interview) {
+        this.interview = interview;
+    }
 
     public Application(LocalDateTime date, String resume_version) {
         this.date = date;

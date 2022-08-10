@@ -1,8 +1,10 @@
 package edu.miu.cs544.ea_final_project.entities.interviewEntities;
 
+import edu.miu.cs544.ea_final_project.entities.Application;
 import edu.miu.cs544.ea_final_project.entities.companyEntities.Recuriter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -11,10 +13,21 @@ public abstract class Interview {
     private int id;
     private String phone;
     private String email;
-    private LocalDateTime interviewDate;
+    private LocalDate interviewDate;
     @ManyToOne
     @JoinColumn(name = "recuriter_id", referencedColumnName = "id")
     private Recuriter recuriter;
+    @OneToOne
+    @JoinColumn(name = "app_id",referencedColumnName = "id")
+    private Application application;
+
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
+    }
 
     public String getPhone() {
         return phone;
@@ -32,11 +45,11 @@ public abstract class Interview {
         this.email = email;
     }
 
-    public LocalDateTime getInterviewDate() {
+    public LocalDate getInterviewDate() {
         return interviewDate;
     }
 
-    public void setInterviewDate(LocalDateTime interviewDate) {
+    public void setInterviewDate(LocalDate interviewDate) {
         this.interviewDate = interviewDate;
     }
 
@@ -55,7 +68,7 @@ public abstract class Interview {
     public Interview() {
     }
 
-    public Interview(String phone, String email, LocalDateTime interviewDate) {
+    public Interview(String phone, String email, LocalDate interviewDate) {
         this.phone = phone;
         this.email = email;
         this.interviewDate = interviewDate;
