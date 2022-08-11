@@ -4,6 +4,7 @@ import edu.miu.cs544.ea_final_project.entities.companyEntities.Company;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,9 +16,9 @@ public class Job implements Serializable {
     @ManyToOne
     @JoinColumn(name = "company_id",referencedColumnName = "id")
     private Company company;
-    @OneToMany(mappedBy = "job", cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
-    private List<Application> applications;
-    @OneToMany(mappedBy = "job")
+    @OneToOne(mappedBy = "job", cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+    private Application application;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "job")
     private List<Skill> skills;
 
 
@@ -53,12 +54,13 @@ public class Job implements Serializable {
         this.company = company;
     }
 
-    public List<Application> getApplications() {
-        return applications;
+
+    public Application getApplication() {
+        return application;
     }
 
-    public void setApplications(List<Application> applications) {
-        this.applications = applications;
+    public void setApplication(Application application) {
+        this.application = application;
     }
 
     public List<Skill> getSkills() {

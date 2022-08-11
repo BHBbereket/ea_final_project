@@ -2,29 +2,17 @@ package edu.miu.cs544.ea_final_project.entities.companyEntities;
 
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.Interview;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.sql.ClientInfoStatus;
 import java.util.List;
 
 @Entity
 @DiscriminatorValue(value = "recuriter")
 public class Recuriter extends Company {
+    @Version
+    private int version;
     @OneToMany(mappedBy = "recuriter")
-    private List<Interview> interviews;
-
-    public Recuriter(List<Interview> interviews) {
-        this.interviews = interviews;
-    }
-
-    public List<Interview> getInterviews() {
-        return interviews;
-    }
-
-    public void setInterviews(List<Interview> interviews) {
-        this.interviews = interviews;
-    }
-
+     private List<Client> clients;
     public Recuriter() {
     }
 
@@ -35,7 +23,7 @@ public class Recuriter extends Company {
     @Override
     public String toString() {
         return "Recuriter{" +
-                "interviews=" + interviews +
+
                 '}';
     }
 }

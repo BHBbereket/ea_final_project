@@ -1,10 +1,16 @@
 package edu.miu.cs544.ea_final_project.entities;
 
+import edu.miu.cs544.ea_final_project.entities.interviewEntities.HiringInterview;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.Interview;
+import edu.miu.cs544.ea_final_project.entities.interviewEntities.ScreeningInterview;
+import edu.miu.cs544.ea_final_project.entities.interviewEntities.TechnicalInterview;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Application {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,24 +20,46 @@ public class Application {
     @ManyToOne
     @JoinColumn(name = "applicant_id",referencedColumnName = "id")
     private Person applicant;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     private Job job;
 
-    @OneToOne(mappedBy = "application")
-    private Interview interview;
+    @OneToOne(mappedBy = "application",cascade = CascadeType.ALL)
+    private ScreeningInterview screeningInterview;
+    @OneToOne(mappedBy = "application",cascade = CascadeType.ALL)
+    private TechnicalInterview technicalInterview;
+    @OneToOne(mappedBy = "application",cascade = CascadeType.ALL)
+    private HiringInterview hiringInterview;
+
+    public ScreeningInterview getScreeningInterview() {
+        return screeningInterview;
+    }
+
+    public void setScreeningInterview(ScreeningInterview screeningInterview) {
+        this.screeningInterview = screeningInterview;
+    }
+
+    public TechnicalInterview getTechnicalInterview() {
+        return technicalInterview;
+    }
+
+    public void setTechnicalInterview(TechnicalInterview technicalInterview) {
+        this.technicalInterview = technicalInterview;
+    }
+
+    public HiringInterview getHiringInterview() {
+        return hiringInterview;
+    }
+
+    public void setHiringInterview(HiringInterview hiringInterview) {
+        this.hiringInterview = hiringInterview;
+    }
 
     public Person getApplicant() {
         return applicant;
     }
 
-    public Interview getInterview() {
-        return interview;
-    }
 
-    public void setInterview(Interview interview) {
-        this.interview = interview;
-    }
 
     public Application(LocalDate date, String resume_version) {
         this.date = date;

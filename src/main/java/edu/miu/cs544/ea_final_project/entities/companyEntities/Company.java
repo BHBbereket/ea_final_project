@@ -9,8 +9,11 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "company_type")
 public class Company {
+
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Version
+    private int version;
     private String name;
     @OneToMany(mappedBy = "company")
     private List<Job> job;

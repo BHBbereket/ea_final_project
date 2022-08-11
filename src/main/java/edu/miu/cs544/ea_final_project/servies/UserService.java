@@ -29,8 +29,10 @@ public class UserService {
         Person person=personRepository.findPersonById(user_id);
         System.out.println(person+" "+ job);
         application.setApplicant(person);
-        application.setJob(job);
         entityManager.persist(application);
+        //job.setApplication(application);
+//        jobRepo.save(job);
+        application.setJob(job);
         return application;
     }
     public Person add(Person person){

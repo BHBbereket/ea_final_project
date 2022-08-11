@@ -12,7 +12,8 @@ public class Address implements Serializable {
     private String city;
     private String state;
     private int zip;
-    @OneToOne(mappedBy = "address",fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id",referencedColumnName = "id" ,nullable = true)
     private Person applicant;
     @OneToOne(mappedBy = "address",fetch = FetchType.LAZY)
     private Company company;

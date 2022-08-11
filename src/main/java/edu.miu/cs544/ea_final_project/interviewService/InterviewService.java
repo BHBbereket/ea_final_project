@@ -35,22 +35,18 @@ public class InterviewService {
 
     public TechnicalInterview addTechnicalInterview(TechnicalInterview technicalInterview,int recu_id,int app_id){
         Application application=application_repo.findById(app_id).get();
-        Recuriter recuriter=recuriter_repo.findById(recu_id).get();
-        technicalInterview.setRecuriter(recuriter);
+
         technicalInterview.setApplication(application);
         return technical_repol.save(technicalInterview);
     }
      public ScreeningInterview addScreeningInterview(ScreeningInterview screeningInterview, int recu_id, int app_id){
         Application application=application_repo.findById(app_id).get();
-        Recuriter recuriter=recuriter_repo.findById(recu_id).get();
-        screeningInterview.setRecuriter(recuriter);
+
         screeningInterview.setApplication(application);
         return screening_repo.save(screeningInterview);
     }
      public HiringInterview addHiringInterview(HiringInterview hiringInterview, int recu_id, int app_id){
         Application application=application_repo.findById(app_id).get();
-        Recuriter recuriter=recuriter_repo.findById(recu_id).get();
-        hiringInterview.setRecuriter(recuriter);
         hiringInterview.setApplication(application);
         return hiring_repo.save(hiringInterview);
     }

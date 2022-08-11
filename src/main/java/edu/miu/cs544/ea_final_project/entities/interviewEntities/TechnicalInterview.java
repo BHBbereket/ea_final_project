@@ -1,7 +1,11 @@
 package edu.miu.cs544.ea_final_project.entities.interviewEntities;
 
+import edu.miu.cs544.ea_final_project.entities.Application;
+
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 @Entity

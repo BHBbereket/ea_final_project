@@ -1,13 +1,17 @@
 package edu.miu.cs544.ea_final_project.entities.companyEntities;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 @Entity
 public class Client extends Company {
     private String mission;
     private String reason;
     private String website;
+    @Version
+    private int version;
 
     @OneToOne(mappedBy = "client")
     private Offer offer;
@@ -15,7 +19,8 @@ public class Client extends Company {
     public Client() {
 
     }
-
+    @ManyToOne
+    private Recuriter recuriter;
     public String getMission() {
         return mission;
     }

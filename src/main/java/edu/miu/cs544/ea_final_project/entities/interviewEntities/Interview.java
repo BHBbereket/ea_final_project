@@ -6,20 +6,19 @@ import edu.miu.cs544.ea_final_project.entities.companyEntities.Recuriter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Interview {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String phone;
     private String email;
     private LocalDate interviewDate;
-    @ManyToOne
-    @JoinColumn(name = "recuriter_id", referencedColumnName = "id")
-    private Recuriter recuriter;
+
     @OneToOne
     @JoinColumn(name = "app_id",referencedColumnName = "id")
     private Application application;
+
 
     public Application getApplication() {
         return application;
@@ -53,13 +52,6 @@ public abstract class Interview {
         this.interviewDate = interviewDate;
     }
 
-    public Recuriter getRecuriter() {
-        return recuriter;
-    }
-
-    public void setRecuriter(Recuriter recuriter) {
-        this.recuriter = recuriter;
-    }
 
     public int getId() {
         return id;

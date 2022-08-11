@@ -58,5 +58,20 @@ public class InterviewController {
         return null;
     }
 
+    @GetMapping("/addScreenInterviewResult/{recuriter_id}/{application_id}")
+    public ScreeningInterview addScreenInterviewResult(@RequestBody ScreeningInterview screeningInterview,@PathVariable int recuriter_id,@PathVariable int application_id){
+
+        return interviewService.addScreeningInterview(screeningInterview,recuriter_id,application_id);
+    }
+    @GetMapping("/addTechnicalInterviewResult/{recuriter_id}/{application_id}")
+    public TechnicalInterview addTechnicalInterviewResult(@RequestBody TechnicalInterview technicalInterview,@PathVariable int recuriter_id,@PathVariable int application_id){
+
+        return interviewService.addTechnicalInterview(technicalInterview,recuriter_id,application_id);
+    }
+    @GetMapping("/addHiringInterviewResult/{recuriter_id}/{application_id}")
+    public HiringInterview  addHiringInterviewResult(@RequestBody HiringInterview hiringInterview,@PathVariable int recuriter_id,@PathVariable int application_id){
+
+        return interviewService.addHiringInterview(hiringInterview,recuriter_id,application_id);
+    }
 
 }
