@@ -26,5 +26,17 @@ public class JobController {
     public void deleteJob(@PathVariable int id) throws NotFoundException {
         jobService.deleteJob(id);
     }
+    @GetMapping("/getJo/{id}")
+    public Job getJob(@PathVariable int id) throws NotFoundException {
+        return jobService.getJob(id);
+    }
+    @PutMapping("/updateJob")
+    public Job updateJob(@RequestBody Job job){
+        return jobService.updateJob(job);
+    }
+    @GetMapping("/getAll")
+    public List<Job> getAll(){
+        return jobService.getAll();
+    }
 
 }

@@ -27,13 +27,13 @@ public class Application {
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     private Job job;
     @JsonIgnore
-    @OneToOne(mappedBy = "application",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "application",cascade = CascadeType.PERSIST)
     private ScreeningInterview screeningInterview;
     @JsonIgnore
-    @OneToOne(mappedBy = "application",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "application",cascade = CascadeType.PERSIST)
     private TechnicalInterview technicalInterview;
     @JsonIgnore
-    @OneToOne(mappedBy = "application",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "application",cascade = CascadeType.PERSIST)
     private HiringInterview hiringInterview;
 
     public ScreeningInterview getScreeningInterview() {

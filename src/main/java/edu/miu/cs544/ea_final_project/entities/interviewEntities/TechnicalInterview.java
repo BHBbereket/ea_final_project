@@ -13,7 +13,7 @@ public class TechnicalInterview extends Interview {
     private Location location;
     private int duration;
     @JsonIgnore
-    @ManyToMany(mappedBy = "technicalInterviews",cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "technicalInterviews",cascade = CascadeType.ALL)
     private List<Questions> questions;
 
     public List<Questions> getQuestions() {
@@ -27,7 +27,7 @@ public class TechnicalInterview extends Interview {
 
     }
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name = "app_id",referencedColumnName = "id")
     private Application application;
 

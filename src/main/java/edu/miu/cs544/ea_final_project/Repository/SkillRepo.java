@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SkillRepo extends JpaRepository<Skill,Integer> {
+
 }

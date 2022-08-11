@@ -7,6 +7,7 @@ import edu.miu.cs544.ea_final_project.Repository.PersonRepository;
 import edu.miu.cs544.ea_final_project.Repository.comoanyRepository.Client_Repo;
 import edu.miu.cs544.ea_final_project.Repository.comoanyRepository.Recuriter_Repo;
 import edu.miu.cs544.ea_final_project.Repository.interviewrepository.Hiring_Repo;
+import edu.miu.cs544.ea_final_project.Repository.interviewrepository.Question_repo;
 import edu.miu.cs544.ea_final_project.Repository.interviewrepository.Screening_repo;
 import edu.miu.cs544.ea_final_project.Repository.interviewrepository.Technical_Repo;
 import edu.miu.cs544.ea_final_project.entities.*;
@@ -41,6 +42,8 @@ public class CommandLineRunnner implements CommandLineRunner {
     private Offer_repo offer_repo;
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
+    private Question_repo question_repo;
 
     @Override
     public void run(String... args) throws Exception {
@@ -140,11 +143,12 @@ public class CommandLineRunnner implements CommandLineRunner {
         personRepository.save(bereket);
         personRepository.save(jerry);
 
-        application_repo.save(bereketApplication);
-        application_repo.save(bereketApplication2);
-        application_repo.save(bereketApplication3);
-        application_repo.save(bereketApplication4);
+        bereketApplication=application_repo.save(bereketApplication);
+        bereketApplication2=application_repo.save(bereketApplication2);
+        bereketApplication3=application_repo.save(bereketApplication3);
+        bereketApplication4=application_repo.save(bereketApplication4);
         application_repo.save(jerryApplication);
+        System.out.println(bereketApplication4.getId());
 
         ScreeningInterview screeningInterview=new ScreeningInterview("6412336548","bhbereket@gmail.com",LocalDate.now(),"bereket",75);
         screeningInterview.setApplication(bereketApplication);
@@ -164,6 +168,7 @@ public class CommandLineRunnner implements CommandLineRunner {
         Questions questions3=new Questions("how you can manage prototype beans");
         Questions questions4=new Questions("can we develop monolithic app from spring boot");
 
+
         TechnicalInterview technicalInterview=new TechnicalInterview("6412336548","bhbereket@gmail.com",LocalDate.now(),Location.Online,5);
         technicalInterview.setQuestions(Arrays.asList(questions,questions2,questions3,questions4));
         technicalInterview.setApplication(bereketApplication);
@@ -180,6 +185,10 @@ public class CommandLineRunnner implements CommandLineRunner {
         technicalInterview.setQuestions(Arrays.asList(questions,questions2,questions3,questions4));
         technicalInterview.setApplication(bereketApplication4);
         bereketApplication4.setTechnicalInterview(technicalInterview4);
+        questions.setTechnicalInterviews(Arrays.asList(technicalInterview,technicalInterview2,technicalInterview3,technicalInterview4));
+        questions2.setTechnicalInterviews(Arrays.asList(technicalInterview,technicalInterview2,technicalInterview3,technicalInterview4));
+        questions3.setTechnicalInterviews(Arrays.asList(technicalInterview,technicalInterview2,technicalInterview3,technicalInterview4));
+        questions4.setTechnicalInterviews(Arrays.asList(technicalInterview,technicalInterview2,technicalInterview3,technicalInterview4));
 
         HiringInterview hiringInterview=new HiringInterview("6412336548","bhbereket@gmail.com",LocalDate.now(),6,LocalDate.now());
         hiringInterview.setApplication(bereketApplication);
@@ -198,11 +207,17 @@ public class CommandLineRunnner implements CommandLineRunner {
         offer.setApplicant(bereket);
         offer.setClient(client);
 
+//        application_repo.save(bereketApplication);
+//        application_repo.save(bereketApplication2);
+//        application_repo.save(bereketApplication3);
+//        application_repo.save(bereketApplication4);
 
         screening_repo.save(screeningInterview1);
         screening_repo.save(screeningInterview);
         screening_repo.save(screeningInterview2);
         screening_repo.save(screeningInterview3);
+
+
 
         technical_repo.save(technicalInterview2);
         technical_repo.save(technicalInterview);

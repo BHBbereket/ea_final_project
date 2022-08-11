@@ -61,4 +61,17 @@ public class JobService {
             throw  new NotFoundException("Job not found");
         jobRepo.deleteById(id);
     }
+
+    public Job getJob(int id) throws NotFoundException {
+        Job j=jobRepo.findJobById(id);
+        if (j==null)
+            throw new NotFoundException("Job not found");
+        return j;
+    }
+    public List<Job> getAll(){
+        return jobRepo.findAll();
+    }
+    public Job updateJob(Job job){
+        return jobRepo.save(job);
+    }
 }

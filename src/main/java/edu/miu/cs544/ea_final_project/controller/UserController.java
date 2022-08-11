@@ -26,4 +26,13 @@ public class UserController {
     public void deleteUser(@PathVariable int id) throws NotFoundException {
         userService.deleteUser(id);
     }
+    @GetMapping("/getUser/{id}")
+    public Person getPerson(@PathVariable int id) throws NotFoundException {
+        return userService.getPerson(id);
+    }
+    @PutMapping("/updatUser/{id}")
+    public Person updateUser(@RequestBody Person person,@PathVariable int id) throws NotFoundException {
+        return userService.updatePerson(person, id);
+    }
+
 }

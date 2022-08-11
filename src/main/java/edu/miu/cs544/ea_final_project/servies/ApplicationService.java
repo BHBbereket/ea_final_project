@@ -2,8 +2,10 @@ package edu.miu.cs544.ea_final_project.servies;
 
 import edu.miu.cs544.ea_final_project.Repository.Application_Repo;
 import edu.miu.cs544.ea_final_project.Repository.JobRepo;
+import edu.miu.cs544.ea_final_project.Repository.PersonRepository;
 import edu.miu.cs544.ea_final_project.entities.Application;
 import edu.miu.cs544.ea_final_project.entities.Job;
+import edu.miu.cs544.ea_final_project.entities.Person;
 import edu.miu.cs544.ea_final_project.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class ApplicationService {
     private Application_Repo application_repo;
     @Autowired
     private JobRepo jobRepo;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     public List<Application> getAllApplication(int job_id){
         Job job=jobRepo.findJobById(job_id);
@@ -32,6 +37,11 @@ public class ApplicationService {
             throw new NotFoundException("Application not Found");
 
         application_repo.deleteById(id);
+    }
+    public List<Application> getAll(int id){
+        Person p= personRepository.findPersonById(id);
+        List<Application> applications=application_repo.findApplicationByApplicant(p);
+        return applications;
     }
 
 }

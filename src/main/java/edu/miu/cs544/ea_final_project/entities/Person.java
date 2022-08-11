@@ -10,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "applicant_table")
+@NamedQuery(name = "Person.findApplicationBySalary",query = "select a from Person as p join Application as a where a.job.salary>12550")
 public class Person implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

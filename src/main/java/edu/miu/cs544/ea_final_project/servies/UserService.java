@@ -46,4 +46,18 @@ public class UserService {
             throw new NotFoundException("user not found");
         personRepository.deleteById(id);
     }
+    public Person updatePerson(Person person,int id) throws NotFoundException {
+        Person p=personRepository.findPersonById(id);
+        if(p==null)
+            throw new NotFoundException("user not found");
+
+        return personRepository.save(person);
+    }
+
+    public Person getPerson(int id) throws NotFoundException {
+        Person p= personRepository.findPersonById(id);
+        if(p==null)
+            throw new NotFoundException("user not found");
+        return p;
+    }
 }

@@ -26,5 +26,9 @@ public class ApplicationContoroller {
     public void deleteCompany(@PathVariable int id) throws NotFoundException {
         applicationService.deleteApplication(id);
     }
+    @GetMapping("/getApplications/{id}")
+    public List<Application> getAll(@PathVariable int id){
+        return applicationService.getAll(id);
+    }
 
 }
