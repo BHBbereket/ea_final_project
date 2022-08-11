@@ -4,7 +4,8 @@ import edu.miu.cs544.ea_final_project.entities.interviewEntities.HiringInterview
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.Interview;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.ScreeningInterview;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.TechnicalInterview;
-import edu.miu.cs544.ea_final_project.interviewService.InterviewService;
+import edu.miu.cs544.ea_final_project.exceptions.NotFoundException;
+import edu.miu.cs544.ea_final_project.servies.interviewService.InterviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,6 +73,18 @@ public class InterviewController {
     public HiringInterview  addHiringInterviewResult(@RequestBody HiringInterview hiringInterview,@PathVariable int recuriter_id,@PathVariable int application_id){
 
         return interviewService.addHiringInterview(hiringInterview,recuriter_id,application_id);
+    }
+    @DeleteMapping("/deleteTecinical/{id}")
+    public void deleteTechincal(@PathVariable int id) throws NotFoundException {
+        interviewService.deleteTechnicalInterview(id);
+    }
+    @DeleteMapping("/deleteHiring/{id}")
+    public void deleteHiring(@PathVariable int id) throws NotFoundException {
+        interviewService.deleteHiring(id);
+    }
+    @DeleteMapping("/deleteScreening/{id}")
+    public void deleteScreening(@PathVariable int id) throws NotFoundException {
+        interviewService.deleteScreening(id);
     }
 
 }

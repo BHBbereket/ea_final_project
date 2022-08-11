@@ -3,6 +3,7 @@ package edu.miu.cs544.ea_final_project.controller;
 import edu.miu.cs544.ea_final_project.entities.Application;
 import edu.miu.cs544.ea_final_project.entities.Job;
 import edu.miu.cs544.ea_final_project.entities.Skill;
+import edu.miu.cs544.ea_final_project.exceptions.NotFoundException;
 import edu.miu.cs544.ea_final_project.servies.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,10 @@ public class JobController {
     @PostMapping("/addSkills/{job_id}")
     public Job addSkills(@RequestBody List<Skill> skills,@PathVariable int job_id){
         return jobService.addSkills(skills,job_id);
+    }
+    @DeleteMapping("/deleteJob/{id}")
+    public void deleteJob(@PathVariable int id) throws NotFoundException {
+        jobService.deleteJob(id);
     }
 
 }

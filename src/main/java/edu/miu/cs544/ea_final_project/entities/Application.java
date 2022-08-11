@@ -1,5 +1,6 @@
 package edu.miu.cs544.ea_final_project.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.HiringInterview;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.Interview;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.ScreeningInterview;
@@ -15,6 +16,8 @@ import java.util.List;
 public class Application {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Version
+    private int virsion;
     private LocalDate date;
     private String resume_version;
     @ManyToOne
@@ -23,11 +26,13 @@ public class Application {
     @OneToOne
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     private Job job;
-
+    @JsonIgnore
     @OneToOne(mappedBy = "application",cascade = CascadeType.ALL)
     private ScreeningInterview screeningInterview;
+    @JsonIgnore
     @OneToOne(mappedBy = "application",cascade = CascadeType.ALL)
     private TechnicalInterview technicalInterview;
+    @JsonIgnore
     @OneToOne(mappedBy = "application",cascade = CascadeType.ALL)
     private HiringInterview hiringInterview;
 

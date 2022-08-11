@@ -10,8 +10,8 @@ public class Client extends Company {
     private String mission;
     private String reason;
     private String website;
-    @Version
-    private int version;
+//    @Version
+//    private int version;
 
     @OneToOne(mappedBy = "client")
     private Offer offer;

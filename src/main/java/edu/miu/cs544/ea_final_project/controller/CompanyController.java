@@ -6,6 +6,7 @@ import edu.miu.cs544.ea_final_project.entities.companyEntities.Offer;
 import edu.miu.cs544.ea_final_project.entities.companyEntities.Recuriter;
 import edu.miu.cs544.ea_final_project.entities.Job;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.ScreeningInterview;
+import edu.miu.cs544.ea_final_project.exceptions.NotFoundException;
 import edu.miu.cs544.ea_final_project.servies.companyService.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,10 @@ public class CompanyController {
     public Offer addOffer(@RequestBody Offer offer, @PathVariable Integer client,@PathVariable int user_id){
 
         return companyService.addOffer(offer,client,user_id);
+    }
+    @DeleteMapping("/deleteCompany/{id}")
+    public void deleteCompany(@PathVariable int id) throws NotFoundException {
+        companyService.deleteCompany(id);
     }
 
 

@@ -1,6 +1,11 @@
 package edu.miu.cs544.ea_final_project.entities.interviewEntities;
 
+import edu.miu.cs544.ea_final_project.entities.Application;
+
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import java.time.LocalDate;
 
 @Entity
 public class ScreeningInterview extends Interview {
@@ -12,7 +17,26 @@ public class ScreeningInterview extends Interview {
         this.result = result;
     }
 
+    public ScreeningInterview(String phone, String email, LocalDate interviewDate, String name, int result) {
+        super(phone, email, interviewDate);
+        this.name = name;
+        this.result = result;
+    }
+
     public ScreeningInterview() {
+    }
+
+    @OneToOne
+    @JoinColumn(name = "app_id",referencedColumnName = "id")
+    private Application application;
+
+
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
     }
 
     public String getName() {

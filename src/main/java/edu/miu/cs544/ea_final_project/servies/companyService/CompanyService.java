@@ -18,6 +18,7 @@ import edu.miu.cs544.ea_final_project.entities.companyEntities.Recuriter;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.HiringInterview;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.ScreeningInterview;
 import edu.miu.cs544.ea_final_project.entities.interviewEntities.TechnicalInterview;
+import edu.miu.cs544.ea_final_project.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,6 @@ import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 
 @Service
-@Transactional
 public class CompanyService {
     @Autowired
     private PersonRepository personRepository;
@@ -66,7 +66,12 @@ public class CompanyService {
         return offer_repo.save(offer);
     }
 
-
+    public void deleteCompany(int id) throws NotFoundException {
+        Company c= company_repo.findCompanyById(id);
+        if(c==null)
+            throw new NotFoundException("Company not Found");
+        company_repo.deleteById(id);
+    }
 
 
 

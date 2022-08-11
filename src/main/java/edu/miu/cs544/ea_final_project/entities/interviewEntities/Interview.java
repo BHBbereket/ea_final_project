@@ -15,19 +15,6 @@ public abstract class Interview {
     private String email;
     private LocalDate interviewDate;
 
-    @OneToOne
-    @JoinColumn(name = "app_id",referencedColumnName = "id")
-    private Application application;
-
-
-    public Application getApplication() {
-        return application;
-    }
-
-    public void setApplication(Application application) {
-        this.application = application;
-    }
-
     public String getPhone() {
         return phone;
     }

@@ -22,8 +22,8 @@ public class Person implements Serializable {
     @OneToOne(mappedBy = "applicant")
     private Offer offer;
 
-    @OneToOne(mappedBy = "applicant",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id",referencedColumnName = "id" ,nullable = true)
     private Address address;
 
     public Address getAddress() {

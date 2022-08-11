@@ -1,11 +1,10 @@
 package edu.miu.cs544.ea_final_project.entities.interviewEntities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.miu.cs544.ea_final_project.entities.Application;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -13,8 +12,37 @@ import java.util.List;
 public class TechnicalInterview extends Interview {
     private Location location;
     private int duration;
-    @OneToMany(mappedBy = "technical_int")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "technicalInterviews",cascade = CascadeType.PERSIST)
     private List<Questions> questions;
+
+    public List<Questions> getQuestions() {
+        return questions;
+    }
+
+    public TechnicalInterview(String phone, String email, LocalDate interviewDate, Location location, int duration) {
+        super(phone, email, interviewDate);
+        this.location = location;
+        this.duration = duration;
+
+    }
+
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "app_id",referencedColumnName = "id")
+    private Application application;
+
+
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
+    }
+
+    public void setQuestions(List<Questions> questions) {
+        this.questions = questions;
+    }
 
     public TechnicalInterview(Location location, int duration) {
         this.location = location;

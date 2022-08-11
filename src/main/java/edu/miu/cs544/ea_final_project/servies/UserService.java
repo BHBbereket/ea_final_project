@@ -6,6 +6,7 @@ import edu.miu.cs544.ea_final_project.Repository.PersonRepository;
 import edu.miu.cs544.ea_final_project.entities.Application;
 import edu.miu.cs544.ea_final_project.entities.Job;
 import edu.miu.cs544.ea_final_project.entities.Person;
+import edu.miu.cs544.ea_final_project.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,13 +30,20 @@ public class UserService {
         Person person=personRepository.findPersonById(user_id);
         System.out.println(person+" "+ job);
         application.setApplicant(person);
-        entityManager.persist(application);
-        //job.setApplication(application);
-//        jobRepo.save(job);
         application.setJob(job);
+        entityManager.persist(application);
+        job.setApplication(application);
+        jobRepo.save(job);
         return application;
     }
     public Person add(Person person){
         return personRepository.save(person);
+    }
+
+    public void deleteUser(int id) throws NotFoundException {
+        Person p= personRepository.findPersonById(id);
+        if(p==null)
+            throw new NotFoundException("user not found");
+        personRepository.deleteById(id);
     }
 }

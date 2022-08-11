@@ -8,6 +8,7 @@ import edu.miu.cs544.ea_final_project.Repository.comoanyRepository.Client_Repo;
 import edu.miu.cs544.ea_final_project.entities.Job;
 import edu.miu.cs544.ea_final_project.entities.Skill;
 import edu.miu.cs544.ea_final_project.entities.companyEntities.Client;
+import edu.miu.cs544.ea_final_project.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -36,10 +37,10 @@ public class JobService {
 
     public Job addSkills(List<Skill> skills,int job_id){
         Job job= jobRepo.findJobById(job_id);
-//        for (Skill skill:skills){
-//            skill.setJob(job);
-//           //skillRepo.save(skill);
-//        }
+        for (Skill skill:skills){
+            skill.setJob(job);
+           //skillRepo.save(skill);
+        }
         job.setSkills(skills);
         entityManager.persist(job);
 //
@@ -52,5 +53,12 @@ public class JobService {
         Client client= client_repo.findClientById(client_id);
         job.setCompany(client);
         return jobRepo.save(job);
+    }
+
+    public void deleteJob(int id) throws NotFoundException {
+        Job j=jobRepo.findJobById(id);
+        if(j==null)
+            throw  new NotFoundException("Job not found");
+        jobRepo.deleteById(id);
     }
 }

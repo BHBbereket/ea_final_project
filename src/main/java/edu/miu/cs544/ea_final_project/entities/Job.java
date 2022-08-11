@@ -1,5 +1,6 @@
 package edu.miu.cs544.ea_final_project.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.miu.cs544.ea_final_project.entities.companyEntities.Company;
 
 import javax.persistence.*;
@@ -12,13 +13,17 @@ public class Job implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
+    @Version
+    private int version;
     private double salary;
     @ManyToOne
     @JoinColumn(name = "company_id",referencedColumnName = "id")
     private Company company;
+    @JsonIgnore
     @OneToOne(mappedBy = "job", cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     private Application application;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "job")
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.MERGE,mappedBy = "job")
     private List<Skill> skills;
 
 
